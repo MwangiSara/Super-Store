@@ -11,8 +11,8 @@ router.register(r'order', Orders_api)
 
 
 urlpatterns = [
-     path('', views.index , name='home'), #route for index.php 
-     path('login/', views.login , name='login'),#route for login
+     path('index/', views.index , name='home'), #route for index.php 
+     path('', views.login , name='login'),#route for login
      path('register/', views.register , name='register'),#route for register
      path('customers/', views.customers , name='customers'),#route for register
      path('orders/', views.orders , name='orders'),#route for register

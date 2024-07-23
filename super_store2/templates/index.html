@@ -14,14 +14,270 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
+  />
+  <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+    <style>
+      .dash1-bg{
+          background-color: #1a6874;  
+          margin-bottom: 15px;  
+      }
+      .dash2-bg{
+          background-color: #4f727f;       
+          margin-bottom: 15px;     
+      }
+  </style>
     <title>Super Store</title>
   </head>
   <body>
     <!-- Include Navbar -->
     {% include 'navbar.html' %}
 
-    <section class="row">
-      <h1>Welcome</h1>
+    <section class="continer-fluid">
+      <div class="row container-fluid mt-3 mx-auto">
+        <div class="col-md-6">
+            <div class="card shadow dash1-bg p-2">
+                <div class="card-title text-light">
+                    <p><li class="las la-user "></li> Customers</p>
+                </div>
+                <div class="card-body text-light row">
+                    <div class="col-md-7">
+                        <h3 id="customerCount"></h3> 
+                    </div>
+                    <div class="col-md-5 ">
+                        <a href="{% url 'customers' %}" class="btn text-light">View</li></a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow dash2-bg p-2">
+                <div class="card-title text-light">
+                    <p><li class="las la-briefcase "></li> Orders</p>
+                </div>
+                <div class="card-body text-light row">
+                    <div class="col-md-7">
+                        <h3 id="orderCount"> </h3> 
+                    </div>
+                    <div class="col-md-5 ">
+                        <a href="{% url 'orders' %}" class="btn text-light">View</li></a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="row mx-auto" id="app">
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <section class="vh-100">
+          <div class="container py-3 h-100">
+            <div class="card shadow">
+              <div class="card-body">
+                <h5 class="card-title">Customers</h5>
+                <div class="container-fluid mt-3">
+                  <div class="tm-hero  justify-content-center align-items-center" data-parallax="scroll" >
+                    <form class="d-flex  tm-search-form">
+                      <input class="form-control tm-search-input"
+                        type="search"
+                        placeholder="Search For Customer"
+                        aria-label="Search"
+                        id="Input"
+                      />
+                    </form>
+                  </div>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nme</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody id="Table">
+                    </tbody>
+                  </table>
+                  
+                
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-6">
+        <section class="vh-100">
+          <div class="container py-3 h-100">
+            <div class="card shadow">
+              <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <div class="container-fluid mt-3">
+                  <div class="tm-hero  justify-content-center align-items-center" data-parallax="scroll" >
+                    <h6 class="text-muted">Filter Orders By Date</h6>
+                    <form class="d-flex tm-search-form">
+                      <input type="date" class="form-control" id="startDate" placeholder="Start Date" />&nbsp;
+                      <input type="date" class="form-control" id="endDate" placeholder="End Date" />
+                  </form>
+                  </div>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Order Item</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Customer Phone</th>
+                        <th scope="col">Orderd At</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody id="orderTable">
+                     
+                    <tr >
+                  </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+    </section>
+    <script>
+      // order and customers count query
+      document.addEventListener('DOMContentLoaded',function(){
+        
+        const orderList =[]
+        fetch('/order/')
+            .then(response => response.json())
+            .then(data => {
+                // Store orders in the list
+                orderList.push(...data);
+                const orderCount =orderList.length
+                console.log(orderCount); 
+                document.getElementById('orderCount').innerText = orderCount+ ' Orders';
+            })
+            .catch(error => {
+                console.error('Error fetching orders:', error);
+                document.getElementById('orderCount').innerText = 'Error';
+            });
+
+        const customerList =[]
+        fetch('/customer/')
+            .then(response => response.json())
+            .then(data => {
+                // Store orders in the list
+                customerList.push(...data);
+                const customerCount =customerList.length
+                console.log(customerCount); 
+                document.getElementById('customerCount').innerText = customerCount+' Customers';
+            })
+            .catch(error => {
+                console.error('Error fetching customers:', error);
+                document.getElementById('customerCount').innerText = 'Error';
+        });
+      });
+      // get customer query
+      document.addEventListener('DOMContentLoaded', function() {
+            const customerList = []; //using list to efficiently manage and retrieve customers and orders because its time complexity is O(n)
+
+            fetch('/customer/')
+                .then(response => response.json())
+                .then(data => {
+                    // Store orders in the list
+                    customerList.push(...data);
+                    console.log(customerList); 
+
+                    const customerTableBody = document.getElementById('Table');
+                    customerList.forEach(customer => {
+                        const customerRow = document.createElement('tr');
+
+                        const customerNameCell = document.createElement('td');
+                        customerNameCell.innerText = customer.customer_name;
+                        customerRow.appendChild(customerNameCell);
+
+                        const customerPhoneCell = document.createElement('td');
+                        customerPhoneCell.innerText = customer.customer_phone;
+                        customerRow.appendChild(customerPhoneCell);
+
+                        const customerEmailCell = document.createElement('td');
+                        customerEmailCell.innerText = customer.customer_email;
+                        customerRow.appendChild(customerEmailCell);
+
+                        customerTableBody.appendChild(customerRow);
+                    });
+                })
+                
+              .catch(error => console.error('Error fetching orders:', error));
+            });
+            // getting orders query
+          document.addEventListener('DOMContentLoaded', function() {
+            const ordersList = [];
+
+            fetch('/order/')
+                .then(response => response.json())
+                .then(data => {
+                    // Store orders in the list
+                    ordersList.push(...data);
+                    console.log(ordersList); 
+
+                    const ordersTableBody = document.getElementById('orderTable');
+                    ordersList.forEach(order => {
+                        const orderRow = document.createElement('tr');
+
+                        const orderItemCell = document.createElement('td');
+                        orderItemCell.innerText = order.orders_item;
+                        orderRow.appendChild(orderItemCell);
+
+                        const orderAmountCell = document.createElement('td');
+                        orderAmountCell.innerText = order.orders_amount;
+                        orderRow.appendChild(orderAmountCell);
+
+                        const orderCustomerCell = document.createElement('td');
+                        orderCustomerCell.innerText = order.order_customer;
+                        orderRow.appendChild(orderCustomerCell);
+
+                        const orderTimeCell = document.createElement('td');
+                        orderTimeCell.innerText =new Date(order.orders_time).toLocaleString();
+                        orderRow.appendChild(orderTimeCell);
+
+                        ordersTableBody.appendChild(orderRow);
+                    });
+                })
+                .catch(error => console.error('Error fetching orders:', error));
+            // filtering orders by date
+            function filterOrders() {
+              const startDateInput = document.getElementById('startDate').value;
+              const endDateInput = document.getElementById('endDate').value;
+              // changing the orders format
+              if (!startDateInput || !endDateInput) 
+              return;
+                const startDate = new Date(startDateInput).toLocaleDateString();
+                const endDate = new Date(endDateInput).toLocaleDateString();
+
+                $('#orderTable tr').each(function() {
+                    const orderDate = new Date($(this).find('td').eq(3).text()).toLocaleDateString();
+                    if (orderDate >= startDate && orderDate <= endDate) {
+                        $(this).show();
+                        console.log("startDate",startDate)
+                        console.log("endDate",endDate)
+                        console.log("orderDate",orderDate)
+                    } else {
+                        $(this).hide();
+                        console.log("startDate",startDate)
+                        console.log("endDate",endDate)
+                        console.log("orderDate",orderDate)
+                        
+                    }
+                    
+                });
+            }
+
+            document.getElementById('startDate').addEventListener('change', filterOrders);
+            document.getElementById('endDate').addEventListener('change', filterOrders);
+        });
+    </script>
     </section>
   </body>
 </html>

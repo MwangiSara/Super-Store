@@ -24,7 +24,7 @@ def register(request):
         # print(form)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/index')
     else:
         form = Users_form()
     return render(request, 'register.html', {'form':form})

@@ -20,26 +20,29 @@
         content: "";
         flex: 1;
         height: 1px;
-        background: #eee;
+        background: #c2c1c1;
       }
     </style>
     <title>Super Store</title>
   </head>
   <body>
-    <!-- Include Navbar -->
-    {% include 'navbar.html' %}
     <section class="container-fluid">
       <section class="row">
         <div class="col-md-12 col-lg-7 col-sm-12 mx-auto">
           <section class="vh-100">
             <div class="container py-5 h-100">
               <div class="card">
-                <h2 class="card-header text-center">Register</h2>
+                <h3 class="card-header text-center">
+                  Welcome to
+                  <span style="color: #00bdc8; font-weight: bolder">SUPER</span>
+                  <span style="font-style: italic">STORE</span>
+                </h3>
                 <div class="card-body">
+                  <h4 class="text-center">Register</h4>
                   <div
                     class="row d-flex align-items-center justify-content-center h-100"
                   >
-                    <div class="col-md-8 col-lg-7 col-xl-6 mb-4">
+                    <div class="col-md-8 col-lg-7 col-xl-6 mb-2">
                       {% load static %}
                       <img
                         src="{% static 'ecommerce-1.png' %}"
@@ -51,34 +54,45 @@
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                       <form method="post" action="{% url 'register' %}">
                         {% csrf_token %}
-                        <div class="form-group row mb-4">
+                        <div data-mdb-input-init class="form-outline mb-2">
                           <label class="col-sm-4 col-form-lable" for=""
                             >Name:</label
                           >
-                          <div class="col-sm-4">{{form.user_name}}</div>
+                          {{form.user_name}}
                         </div>
 
-                        <div class="form-group row mb-4">
+                        <div data-mdb-input-init class="form-outline mb-2">
                           <label class="col-sm-4 col-form-lable" for=""
                             >Phone:</label
                           >
-                          <div class="col-sm-4">{{form.user_phone}}</div>
+                          {{form.user_phone}}
                         </div>
-                        <div class="form-group row mb-4">
+                        <div data-mdb-input-init class="form-outline mb-2">
                           <label class="col-sm-4 col-form-lable" for=""
                             >Email:</label
                           >
-                          <div class="col-sm-4">{{form.email}}</div>
+                          {{form.email}}
                         </div>
-                        <div class="form-group row mb-4">
+                        <div data-mdb-input-init class="form-outline mb-2">
                           <label class="col-sm-4 col-form-lable" for=""
                             >Password:</label
                           >
-                          <div class="col-sm-4">{{form.password}}</div>
+                          {{form.password}}
+                        </div>
+                        <div
+                          class="d-flex justify-content-around align-items-center mb-2"
+                        >
+                          <a href="{% url 'login' %}"
+                            >Already Have An Account? LogIn</a
+                          >
                         </div>
                         <button
                           class="btn btn-block form-control"
-                          style="background-color: #00ffff; font-weight: 600"
+                          style="
+                            background-color: #00bdc8;
+                            font-weight: 600;
+                            color: white;
+                          "
                           type="submit"
                         >
                           Signup
@@ -90,8 +104,12 @@
                         </div>
                         <a
                           data-mdb-ripple-init
-                          class="btn btn-primary form-control btn-block"
-                          style="background-color: #3b5998"
+                          class="btn form-control btn-block"
+                          style="
+                            background-color: #3b5998;
+                            color: white;
+                            font-weight: 600;
+                          "
                           href="{% url 'oidc_authentication_init' %}"
                           role="button"
                         >
@@ -108,70 +126,5 @@
         </div>
       </section>
     </section>
-    <!-- <section class="container-fluid">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-lg-8 col-xl-6">
-            <div class="card rounded-3 shadow">
-              {% load static %}
-              <img
-                src="{% static 'ecommerce-1.png' %}"
-                class="w-100"
-                style="
-                  border-top-left-radius: 0.3rem;
-                  border-top-right-radius: 0.3rem;
-                "
-                alt="ecommerce-1"
-              />
-              <div class="card-body p-4 p-md-5">
-                <h3
-                  class="mb-2 pb-2 pb-md-0 mb-md-2 px-md-2"
-                  style="
-                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
-                      sans-serif;
-                  "
-                >
-                  Registration Info
-                </h3>
-                <form method="post" action="{% url 'register' %}">
-                  {% csrf_token %}
-                  <div class="form-group row mb-4">
-                    <label class="col-sm-3 col-form-lable" for="">Name:</label>
-                    <div class="col-sm-4">{{form.user_name}}</div>
-                  </div>
-
-                  <div class="form-group row mb-4">
-                    <label class="col-sm-3 col-form-lable" for="">Phone:</label>
-                    <div class="col-sm-4">{{form.user_phone}}</div>
-                  </div>
-                  <div class="form-group row mb-4">
-                    <label class="col-sm-3 col-form-lable" for="">Email:</label>
-                    <div class="col-sm-4">{{form.email}}</div>
-                  </div>
-                  <div class="form-group row mb-4">
-                    <label class="col-sm-3 col-form-lable" for=""
-                      >Password:</label
-                    >
-                    <div class="col-sm-4">{{form.password}}</div>
-                  </div>
-                  <button
-                    class="btn"
-                    style="background-color: #00ffff; font-weight: 600"
-                    type="submit"
-                  >
-                    Signup
-                  </button>
-                  <a
-                    class="btn btn-outline-primary"
-                    href="{% url 'oidc_authentication_init' %}"
-                    >Register with OpenID</a
-                  >
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
   </body>
 </html>

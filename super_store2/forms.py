@@ -2,18 +2,14 @@ from django import forms
 from .models import *
 
 class Users_form(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-
     class Meta:
         model = Users
         fields = "__all__"
+        widgets = {
+            'user_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter User name'}),
+            'user_phone': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone Number'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter Email'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password'}),
+        }
 
-# class AddCustomers(forms.ModelForm):
-#     class Meta:
-#         model = Customer
-#         fields= "__all__"
-#         widgets = {
-#             'customer_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter customer name'}),
-#             'customer_code': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter customer code'}),
-#         }
     
