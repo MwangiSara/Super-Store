@@ -19,9 +19,10 @@ jobs:
       mysql:
         image: mysql:${{ matrix.mysql-version }}
         env:
-          DB_DATABASE: super_store
-          DB_USER: root
-          DB_PASSWORD: root
+          MYSQL_DATABASE: super_store
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: user
+          MYSQL_PASSWORD:
         ports:
           - 13306:3306
         options: >-
@@ -43,20 +44,5 @@ jobs:
         env:
           AFRICASTALKING_USERNAME: ${{ secrets.AFRICASTALKING_USERNAME }}
           AFRICASTALKING_API_KEY: ${{ secrets.AFRICASTALKING_API_KEY }}
-        run: |
-          python manage.py test
-
-      - name: Start MySQL
-        run: |
-          sudo /etc/init.d/mysql start
-
-      - name: Run migrations
-        env:
-          DATABASE_URL: mysql://user:password@<container_ip_or_hostname>:3306/super_store
-        run: |
-          python manage.py migrate
-      - name: Run tests
-        env:
-          DATABASE_URL: mysql://user:password@<container_ip_or_hostname>:3306/super_store
         run: |
           python manage.py test
