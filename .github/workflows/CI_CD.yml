@@ -48,11 +48,11 @@ jobs:
           python manage.py test
       - name: Run migrations
         env:
-          DATABASE_URL: mysql://user:password@127.0.0.1:3306/super_store
+          DATABASE_URL: mysql://user:password@<container_ip_or_hostname>:3306/super_store
         run: |
           python manage.py migrate
       - name: Run tests
         env:
-          DATABASE_URL: mysql://user:password@127.0.0.1:3306/super_store
+          DATABASE_URL: mysql://user:password@<container_ip_or_hostname>:3306/super_store
         run: |
           python manage.py test
