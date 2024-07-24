@@ -50,11 +50,11 @@ jobs:
           echo "Waiting for database connection..."
           sleep 5
           done
-          - name: Run migrations
-          env:
-            DATABASE_URL: mysql://user:password@localhost:3306/super_store
-          run: |
-            python manage.py migrate
+      - name: Run migrations
+        env:
+          DATABASE_URL: mysql://user:password@localhost:3306/super_store
+        run: |
+          python manage.py migrate
       - name: Run tests
         env:
           DATABASE_URL: mysql://user:password@localhost:3306/super_store
