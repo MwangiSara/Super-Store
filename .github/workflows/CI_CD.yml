@@ -22,7 +22,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: super_store
           MYSQL_USER: user
-          MYSQL_PASSWORD: your_default_password
+          MYSQL_PASSWORD: password
         ports:
           - 13306:3306
         options: >-
