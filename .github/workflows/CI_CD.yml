@@ -19,10 +19,9 @@ jobs:
       mysql:
         image: mysql:${{ matrix.mysql-version }}
         env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: super_store
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
+          DB_DATABASE: super_store
+          DB_USER: root
+          DB_PASSWORD: root
         ports:
           - 13306:3306
         options: >-
@@ -46,6 +45,11 @@ jobs:
           AFRICASTALKING_API_KEY: ${{ secrets.AFRICASTALKING_API_KEY }}
         run: |
           python manage.py test
+
+      - name: Start MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
       - name: Run migrations
         env:
           DATABASE_URL: mysql://user:password@<container_ip_or_hostname>:3306/super_store
