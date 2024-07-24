@@ -3,3 +3,4 @@ djangorestframework
 mozilla-django-oidc
 python-dotenv
 mysqlclient
+africastalking
