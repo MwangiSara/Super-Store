@@ -46,12 +46,6 @@ jobs:
           AFRICASTALKING_API_KEY: ${{ secrets.AFRICASTALKING_API_KEY }}
         run: |
           python manage.py test
-      - name: Wait for MySQL
-        run: |
-          while ! mysqladmin ping -h 127.0.0.1 --silent; do
-            echo "Waiting for database connection..."
-            sleep 5
-          done
       - name: Run migrations
         env:
           DATABASE_URL: mysql://user:password@127.0.0.1:3306/super_store
