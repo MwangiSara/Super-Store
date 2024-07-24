@@ -20,6 +20,7 @@ jobs:
         image: mysql:${{ matrix.mysql-version }}
         env:
           MYSQL_DATABASE: super_store
+          MYSQL_ROOT_PASSWORD: root
         ports:
           - 13306:3306
         options: >-
