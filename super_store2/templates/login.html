@@ -60,9 +60,17 @@
                           href="{% url 'oidc_authentication_init' %}"
                           role="button"
                         >
-                          <i class="fab fa-facebook-f me-2"></i>Continue with
-                          Google
+                          <i class="fab fa-facebook-f me-2 mb-2"></i>Continue
+                          with Google
                         </a>
+
+                        <div
+                          class="d-flex justify-content-around align-items-center mt-2"
+                        >
+                          <a href="{% url 'register' %}"
+                            >Don't Have An Account? Register</a
+                          >
+                        </div>
                       </form>
                     </div>
                   </div>
