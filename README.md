@@ -74,10 +74,10 @@
 - **Orders Page**: You can add and View Orders here
   ![image](https://github.com/user-attachments/assets/d0c05579-a9fa-4494-9107-dac9d161f1da)
 ## API Endpoints
-- GET [api/products](http://127.0.0.1:8000/order/) - List all orders
-- POST [api/products](http://127.0.0.1:8000/order/)- Create a new orders
-- GET [api/products](http://127.0.0.1:8000/customer/) - List all customers
-- POST [api/products](http://127.0.0.1:8000/customer/)- Create a new customers
+- GET [api/order](http://127.0.0.1:8000/order/) - List all orders
+- POST [api/order](http://127.0.0.1:8000/order/)- Create a new orders
+- GET [api/customer](http://127.0.0.1:8000/customer/) - List all customers
+- POST [api/customer](http://127.0.0.1:8000/customer/)- Create a new customers
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request with any improvements or new features. Here are the Steps
   1. Fork the repository
