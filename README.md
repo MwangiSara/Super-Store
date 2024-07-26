@@ -94,11 +94,11 @@ Use Django ```TestCase``` module to create your own tests
 ## Coverage
 To identify which parts of the code are not tested, thereby revealing untested areas that could potentially harbor bugs, use coverage software
 ### Measuring Coverage
-Install coverage ```pip install coverage```
-run test using coverage ```coverage run manage.py test```
-get report ```coverage report``
+- Install coverage ```pip install coverage```
+- run test using coverage ```coverage run manage.py test```
+- get report ```coverage report``
 ![image](https://github.com/user-attachments/assets/d1ff34b7-7046-4ba6-b50b-8ac7fc93ec36)
-Generate report in HTML ```coverage html```
+- Generate report in HTML ```coverage html```
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request with any improvements or new features. Here are the Steps
   1. Fork the repository
