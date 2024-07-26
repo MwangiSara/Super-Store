@@ -12,6 +12,12 @@
 - [Sections](#sections)
 - [Screenshots](#screenshots)
 - [API Endpoints](#api-endpoints)
+- [Unit Testing](#unit-testing)
+  - [Running Tests](#running-tests)
+  - [Writing Tests](#writing-tests)
+- [Coverage](#coverage)
+  - [Measuring Coverage](#measuring-coverage)
+  - [Improving Coverage](#improving-coverage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -78,6 +84,21 @@
 - POST [api/order](http://127.0.0.1:8000/order/)- Create a new orders
 - GET [api/customer](http://127.0.0.1:8000/customer/) - List all customers
 - POST [api/customer](http://127.0.0.1:8000/customer/)- Create a new customers
+## Unit Testing
+Here are some tests for this project and the steps
+### Running test
+run your test using ```python manage.py test```
+### Write the test
+the tests are in test.py
+Use Django ```TestCase``` module to create your own tests
+## Coverage
+To identify which parts of the code are not tested, thereby revealing untested areas that could potentially harbor bugs, use coverage software
+### Measuring Coverage
+- Install coverage ```pip install coverage```
+- run test using coverage ```coverage run manage.py test```
+- get report ```coverage report``
+![image](https://github.com/user-attachments/assets/d1ff34b7-7046-4ba6-b50b-8ac7fc93ec36)
+- Generate report in HTML ```coverage html```
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request with any improvements or new features. Here are the Steps
   1. Fork the repository
